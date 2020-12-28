@@ -34,7 +34,7 @@ ABasicPhysicalBullet::ABasicPhysicalBullet()
 	ProjectileMovementComponent->bInterpRotation = true;
 	ProjectileMovementComponent->Velocity = FVector(1.0f, 0.0f, 0.0f);
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh>DefaultStaticMeshObject(TEXT("StaticMesh'/Game/Meshes/Weapons/Ranged/Bullets/51mm/51mm_-_bullet.51mm_-_bullet'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh>DefaultStaticMeshObject(TEXT("StaticMesh'/VREngineGuns/Meshes/51mm/51mm_-_bullet.51mm_-_bullet'"));
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainMesh"));
 	StaticMeshComponent->SetStaticMesh(DefaultStaticMeshObject.Object);
 
@@ -44,7 +44,7 @@ ABasicPhysicalBullet::ABasicPhysicalBullet()
 	StaticMeshComponent->SetGenerateOverlapEvents(true);
 	StaticMeshComponent->SetNotifyRigidBodyCollision(true);
 
-	static ConstructorHelpers::FObjectFinder<USoundBase>HitSoundObject(TEXT("SoundCue'/Game/Audio/Guns/BulletHit_Cue.BulletHit_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundBase>HitSoundObject(TEXT("SoundCue'/VREngineGuns/Audio/BulletHit_Cue.BulletHit_Cue'"));
 	HitSound = HitSoundObject.Object;
 
 	StaticMeshComponent->OnComponentHit.AddDynamic(this, &ABasicPhysicalBullet::OnComponentHit);

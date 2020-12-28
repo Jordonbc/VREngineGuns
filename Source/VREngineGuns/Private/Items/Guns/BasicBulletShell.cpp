@@ -15,7 +15,7 @@ ABasicBulletShell::ABasicBulletShell()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh>DefaultStaticMeshObject(TEXT("StaticMesh'/Game/Meshes/Weapons/Ranged/Bullets/51mm/51mm_-_shell.51mm_-_shell'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh>DefaultStaticMeshObject(TEXT("StaticMesh'/VREngineGuns/Meshes/51mm/51mm_-_shell.51mm_-_shell'"));
 	GetStaticMeshComponent()->SetStaticMesh(DefaultStaticMeshObject.Object);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
@@ -28,7 +28,7 @@ ABasicBulletShell::ABasicBulletShell()
 	MainMesh->BodyInstance.bOverrideMass = true;
 	MainMesh->BodyInstance.SetMassOverride(0.1f);
 
-	static ConstructorHelpers::FObjectFinder<USoundBase>HitSoundObject(TEXT("SoundCue'/Game/Audio/Guns/BulletShell_Cue.BulletShell_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundBase>HitSoundObject(TEXT("SoundCue'/VREngineGuns/Audio/BulletShell_Cue.BulletShell_Cue'"));
 	HitSound = HitSoundObject.Object;
 
 	MainMesh->OnComponentHit.AddDynamic(this, &ABasicBulletShell::OnBulletComponentHit);

@@ -75,13 +75,13 @@ ABasicGun::ABasicGun()
 	ReloadEnd->SetSphereRadius(2.0f);
 	ReloadEnd->SetRelativeLocation(FVector(-1.20118, -0.707862, -2.724649), false);
 
-	static ConstructorHelpers::FObjectFinder<USoundBase>EmptySoundObject(TEXT("SoundWave'/Game/Audio/Guns/DryGun.DryGun'"));
+	static ConstructorHelpers::FObjectFinder<USoundBase>EmptySoundObject(TEXT("SoundWave'/VREngineGuns/Audio/EmptyGun.EmptyGun'"));
 	EmptySound = EmptySoundObject.Object;
 
-	static ConstructorHelpers::FObjectFinder<USoundBase>HitSoundObject(TEXT("SoundCue'/Game/Audio/Guns/BulletHit_Cue.BulletHit_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundBase>HitSoundObject(TEXT("SoundCue'/VREngineGuns/Audio/BulletHit_Cue.BulletHit_Cue'"));
 	HitSound = HitSoundObject.Object;
 
-	static ConstructorHelpers::FObjectFinder<USoundBase>ShootSoundObject(TEXT("SoundWave'/Game/Audio/Guns/Scar-H.Scar-H'"));
+	static ConstructorHelpers::FObjectFinder<USoundBase>ShootSoundObject(TEXT("SoundWave'/VREngineGuns/Audio/Fire.Fire'"));
 	ShootSound = ShootSoundObject.Object;
 
 	AmmoCollision->OnComponentBeginOverlap.AddDynamic(this, &ABasicGun::OnAmmoBoxComponentBeginOverlap);
@@ -93,7 +93,7 @@ ABasicGun::ABasicGun()
 	EmptyAnimationCurve = CreateDefaultSubobject<UTimelineComponent>(TEXT("EmptyTimeline"));
 
 	EmptyAnimationCurveProgress.BindUFunction(this, FName("EmptyAnimationCurve_Update"));
-	static ConstructorHelpers::FObjectFinder<UCurveFloat>EmptyCurveFloatObject(TEXT("CurveFloat'/Game/Blueprints/Items/CppTesting/EmptyAnimationCurve.EmptyAnimationCurve'"));
+	static ConstructorHelpers::FObjectFinder<UCurveFloat>EmptyCurveFloatObject(TEXT("CurveFloat'/VREngineGuns/Curves/EmptyAnimationCurve.EmptyAnimationCurve'"));
 	UCurveFloat* EmptyCurveFloat = EmptyCurveFloatObject.Object;
 	EmptyAnimationCurve->AddInterpFloat(EmptyCurveFloat, EmptyAnimationCurveProgress, FName("Value"));
 	EmptyAnimationCurve->SetLooping(false);
@@ -102,7 +102,7 @@ ABasicGun::ABasicGun()
 	FullReloadAnimationCurve = CreateDefaultSubobject<UTimelineComponent>(TEXT("FullReloadTimeline"));
 
 	FullReloadAnimationCurveProgress.BindUFunction(this, "FullReloadAnimationCurve_Update");
-	static ConstructorHelpers::FObjectFinder<UCurveFloat>FullReloadCurveFloatObject(TEXT("CurveFloat'/Game/Blueprints/Items/CppTesting/FullReloadAnimationCurve.FullReloadAnimationCurve'"));
+	static ConstructorHelpers::FObjectFinder<UCurveFloat>FullReloadCurveFloatObject(TEXT("CurveFloat'/VREngineGuns/Curves/FullReloadAnimationCurve.FullReloadAnimationCurve'"));
 	UCurveFloat* FullReloadCurveFloat = FullReloadCurveFloatObject.Object;
 	FullReloadAnimationCurve->AddInterpFloat(FullReloadCurveFloat, FullReloadAnimationCurveProgress, FName("Value"));
 	FullReloadAnimationCurve->SetLooping(false);
@@ -113,7 +113,7 @@ ABasicGun::ABasicGun()
 	FullReloadAnimationCurve->SetTimelineFinishedFunc(FullReloadAnimation_EndEvent);
 
 
-	static ConstructorHelpers::FObjectFinder<UParticleSystem>FiringPS_Object(TEXT("ParticleSystem'/Game/Meshes/Effects/V2/P_Fire.P_Fire'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem>FiringPS_Object(TEXT("ParticleSystem'/VREngineGuns/Effects/P_Fire.P_Fire'"));
 	FiringPS = FiringPS_Object.Object;
 
 	PhysicalBulletClass = ABasicPhysicalBullet::StaticClass();
