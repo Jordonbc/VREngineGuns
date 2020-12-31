@@ -44,6 +44,7 @@ ABasicGun::ABasicGun()
 	ShootSphere = CreateDefaultSubobject<USphereComponent>(TEXT("ShootSphere"));
 	ShootSphere->SetupAttachment(MainMesh);
 	ShootSphere->SetRelativeLocation(FVector(16.597584, -0.520334, 3.551846));
+	ShootSphere->SetSphereRadius(1.0f);
 
 	if (HasAmmoCollision)
 	{
@@ -617,7 +618,6 @@ void ABasicGun::Tick(float DeltaTime)
 		if (ReloadValueNormalized >= 0.9f && ReloadValueNormalized < 1.0f) ReloadValueNormalized = 1.0f;
 		else if (ReloadValueNormalized <= 0.1f && ReloadValueNormalized > 0.0f) ReloadValueNormalized = 0.0f;
 
-		//TODO: Don't be lazy here and get a dedicated GetPlayer global function!
 		TriggerValue = MotionControllerBP->Player->GetTriggerValue(MotionControllerBP);
 
 		if (ReloadMotionController && !bFiring)

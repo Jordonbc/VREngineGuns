@@ -26,18 +26,22 @@ public:
 	virtual void OnDeactivate_Implementation() override;
 	virtual void SetupParams() override;
 
+	/* Bullets per minutes, used to calculate how many times to fire per second. e.g. (60/RoundsPerMinute) */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gun Stats")
 		float RoundsPerMinute = 600;
-
+	/* Range of the gun in meters. e.g. 350m */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gun Stats")
 		float Range = 350;
 
+	/* Size of the shell to be ejected out of the gun. 1.0 = 100% of model size */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gun Stats")
 		float ShellSize = 1.0f;
 
+	/* If true, spawns shells coming out of the side of the gun. **True can be performance heavy** */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gun Stats")
 		bool bSpawnShells = true;
 
+	/* If true, the gun can be fired by player. If false, player cannot fire gun. */
 	UPROPERTY(BlueprintReadOnly, Category = "Gun Stats")
 		bool bCanFire = true;
 
@@ -67,13 +71,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gun Stats")
 		float ReloadValueNormalized;
 
-	/* If True, the ammo will be consumed like a shotgun */
+	/* If True, the ammo will be consumed like a shotgun e.g. Despawned when attaches to gun. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gun Stats")
 		bool bConsumeAmmo = false;
 
+	/* If true, the bullet will be line traced for performance. If false, Spawns an actor to act as a physical bullet. **False can be performance heavy** */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gun Stats")
 		bool bLineTraced = true;
-
+	 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gun Stats")
 		TSubclassOf<class ABasicPhysicalBullet> PhysicalBulletClass;
 

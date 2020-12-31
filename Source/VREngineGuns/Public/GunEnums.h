@@ -8,9 +8,9 @@
 UENUM(BlueprintType)
 enum class EFireMode : uint8
 {
-	SingleShot 	UMETA(DisplayName = "SingleShot"),
-	FullAuto 	UMETA(DisplayName = "FullAuto"),
-	DoubleAction	UMETA(DisplayName = "Double Action")
+	SingleShot 	UMETA(DisplayName = "SingleShot", ToolTip = "Gun fires one bullet, player has to manually reload."),
+	FullAuto 	UMETA(DisplayName = "FullAuto", ToolTip = "Gun continuously fires."),
+	DoubleAction	UMETA(DisplayName = "Double Action", ToolTip = "Gun auto reloads if mag is not empty.")
 };
 
 UENUM(BlueprintType)
