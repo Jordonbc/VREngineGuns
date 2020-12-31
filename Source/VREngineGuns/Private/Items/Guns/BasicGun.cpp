@@ -333,9 +333,8 @@ bool ABasicGun::AttachAttachment(ABasicAttachment* Attachment, FName SocketName)
 
 		return true;
 	}
-	UE_LOG(LogTemp, VeryVerbose, TEXT("WARN: Unabable to attach component to gun!"));
+	UE_LOG(LogTemp, VeryVerbose, TEXT("WARN: Unable to attach component to gun!"));
 	return false;
-	//ULog::Warning(FString("WARN: Unabable to attach component to gun!"));
 }
 
 bool ABasicGun::DetachAttachment(FAttachment AttachmentToDetach)
@@ -356,9 +355,9 @@ bool ABasicGun::DetachAttachment(FAttachment AttachmentToDetach)
 			}
 		}
 
+		// Really, this should never happen but just in case it does, something terrible must of happened to get in this state...
 		UE_LOG(LogTemp, VeryVerbose, TEXT("FATAL: you are trying to remove an attachment that is not attached to the gun!"));
 		return false;
-		//ULog::Fatal(FString("FATAL: you are trying to remove an attachment that is not attached to the gun!"));
 	}
 	else return false;
 }
@@ -470,25 +469,18 @@ void ABasicGun::OnAmmoBoxComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 				{
 					FAttachment AmmoAttachment = GetAmmoAttachment();
 
+					// Check to see if there is already ammo attached to the gun
 					if (AmmoAttachment.AttachmentActor != nullptr)
 					{
-						//UE_LOG(LogTemp, VeryVerbose, TEXT("");
-						//ULog::DebugMessage(EDebugLogType::DL_Info, AmmoAttachment.AttachmentActor->GetName());
-
 						if (ABasicAmmo* AmmoActor = Cast<ABasicAmmo>(AmmoAttachment.AttachmentActor))
 						{
 							if (IsValid(AmmoActor))
 							{
 								DetachAttachment(AmmoActor);
-								//RemoveAmmo(AmmoActor);
 							}
 						}
 					}
 
-					
-
-					//if (CompatibleAmmoTypes.Contains(AsAmmo->GetClass())) // PROBLEM CODE!!
-					//if (CompatibleAmmoTypes.ContainsByPredicate([AsAmmo](TSubclassOf<ABasicAmmo> Element) { return Element.Get() == AsAmmo->GetClass(); }))
 					if(UGlobalFunctionLibrary::ArrayContainsClass<ABasicAmmo>(CompatibleAmmoTypes, AsAmmo->GetClass()))
 					{
 						PreInitAttachment(AsAmmo);
