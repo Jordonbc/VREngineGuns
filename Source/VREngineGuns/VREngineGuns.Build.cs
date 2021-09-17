@@ -45,8 +45,7 @@ public class VREngineGuns : ModuleRules
 				"Slate",
 				"SlateCore",
 				"HeadMountedDisplay",
-				"SteamvR",
-				"UnrealEd"
+				"SteamvR"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
