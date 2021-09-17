@@ -8,12 +8,9 @@
 #include "UObject/UnrealType.h"
 #include "GlobalEnums.h"
 #include "GlobalStructs.h"
+#include "GunEnums.h"
+#include "GunStructs.h"
 #include "BasicGun.generated.h"
-
-/**
- *
- */
-
 
 UCLASS(abstract)
 class VRENGINEGUNS_API ABasicGun : public ASkeletalMeshItem, public IVRDualHands

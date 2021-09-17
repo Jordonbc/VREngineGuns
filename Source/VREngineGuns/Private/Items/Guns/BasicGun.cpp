@@ -6,8 +6,6 @@
 #include "Components/BoxComponent.h"
 #include "Components/SphereComponent.h"
 #include "Player/BaseMotionController.h"
-#include "Components/CapsuleComponent.h"
-#include "DebugMacros.h"
 #include "Interfaces/VRDualHands.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
@@ -19,10 +17,8 @@
 #include "Items/Guns/BasicBulletShell.h"
 #include "Components/TimelineComponent.h"
 #include "GlobalFunctionLibrary.h"
-//#include "Log.h"
 #include "Player/BasePlayerPawn.h"
 #include "Particles/ParticleSystem.h"
-#include "UObject/ConstructorHelpers.h"
 #include "Items/Guns/BasicPhysicalBullet.h"
 
 DEFINE_LOG_CATEGORY_STATIC(BasicGunLog, All, All)
@@ -299,7 +295,7 @@ bool ABasicGun::PreInitAttachment(ABasicAttachment* Attachment)
 
 bool ABasicGun::AttachAttachment(ABasicAttachment* Attachment, FName SocketName)
 {
-	bool Attached;
+	bool Attached = false;
 
 	if (IsValid(Attachment))
 	{
@@ -331,10 +327,10 @@ bool ABasicGun::AttachAttachment(ABasicAttachment* Attachment, FName SocketName)
 		
 		Attachments.Add(Attachment->Attachment);
 
-		return true;
+		return Attached;
 	}
 	UE_LOG(LogTemp, VeryVerbose, TEXT("WARN: Unable to attach component to gun!"));
-	return false;
+	return Attached;
 }
 
 bool ABasicGun::DetachAttachment(FAttachment AttachmentToDetach)
